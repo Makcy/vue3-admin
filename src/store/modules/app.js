@@ -2,7 +2,9 @@ import Cookies from 'js-cookie'
 
 const state = {
   sidebar: {
-    opened: Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true,
+    opened: Cookies.get('sidebarStatus')
+      ? !!+Cookies.get('sidebarStatus')
+      : true,
     withoutAnimation: false,
     hide: false
   },
@@ -11,9 +13,9 @@ const state = {
 }
 
 const mutations = {
-  TOGGLE_SIDEBAR: state => {
+  TOGGLE_SIDEBAR: (state) => {
     if (state.sidebar.hide) {
-      return false;
+      return false
     }
     state.sidebar.opened = !state.sidebar.opened
     state.sidebar.withoutAnimation = false
