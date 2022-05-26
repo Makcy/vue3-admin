@@ -11,7 +11,7 @@ NProgress.configure({ showSpinner: false })
 
 const whiteList = ['/login', '/auth-redirect', '/bind', '/register']
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   NProgress.start()
   if (getToken()) {
     to.meta.title && store.dispatch('settings/setTitle', to.meta.title)
@@ -20,8 +20,14 @@ router.beforeEach((to, from, next) => {
       next({ path: '/' })
       NProgress.done()
     } else {
-      store.dispatch('GenerateRoutes')
-      next()
+      try {
+        await store.dispatch('GetInfo')
+        await store.dispatch('GenerateRoutes')
+        next()
+      } catch (error) {
+        await store.dispatch('LogOut')
+        next({ path: '/' })
+      }
     }
   } else {
     // 没有token
