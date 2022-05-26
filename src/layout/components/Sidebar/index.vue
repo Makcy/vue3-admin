@@ -29,7 +29,7 @@
         mode="vertical"
       >
         <sidebar-item
-          v-for="(route, index) in sidebarRouters"
+          v-for="(route, index) in sidebarRoutes"
           :key="route.path + index"
           :item="route"
           :base-path="route.path"
@@ -47,7 +47,7 @@ import { useRouter } from 'vue-router'
 
 const route = useRoute()
 const store = useStore()
-const sidebarRouters = computed(() => store.getters.defaultRoutes)
+const sidebarRoutes = computed(() => store.getters.defaultRoutes)
 const showLogo = computed(() => store.state.settings.sidebarLogo)
 const sideTheme = computed(() => store.state.settings.sideTheme)
 const theme = computed(() => store.state.settings.theme)
