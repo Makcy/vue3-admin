@@ -15,11 +15,10 @@
       class="main-container"
     >
       <div :class="{ 'fixed-header': fixedHeader }">
-        <navbar @setLayout="setLayout" />
+        <navbar />
         <tags-view v-if="needTagsView" />
       </div>
       <app-main />
-      <settings ref="settingRef" />
     </div>
   </div>
 </template>
@@ -27,8 +26,7 @@
 <script setup>
 import { useWindowSize } from '@vueuse/core'
 import Sidebar from './components/Sidebar/index.vue'
-import { AppMain, Navbar, Settings, TagsView } from './components'
-import defaultSettings from '@/settings'
+import { AppMain, Navbar, TagsView } from './components'
 
 const store = useStore()
 const theme = computed(() => store.state.settings.theme)
@@ -62,11 +60,6 @@ watchEffect(() => {
 
 function handleClickOutside() {
   store.dispatch('app/closeSideBar', { withoutAnimation: false })
-}
-
-const settingRef = ref(null)
-function setLayout() {
-  settingRef.value.openSetting()
 }
 </script>
 

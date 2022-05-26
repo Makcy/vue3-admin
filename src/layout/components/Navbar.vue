@@ -53,9 +53,6 @@ function toggleSideBar() {
 
 function handleCommand(command) {
   switch (command) {
-    case 'setLayout':
-      setLayout()
-      break
     case 'logout':
       logout()
       break
@@ -76,11 +73,6 @@ function logout() {
       })
     })
     .catch(() => {})
-}
-
-const emits = defineEmits(['setLayout'])
-function setLayout() {
-  emits('setLayout')
 }
 </script>
 
